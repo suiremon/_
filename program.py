@@ -9,7 +9,7 @@ class PredictionModel:
         self.modelpath = modelpath
         self.instance = joblib.load(self.modelpath)
         
-    def transform_json(self, json): #изменяет входные данные (оставляет только theory)
+    def transform_json(self, json):
         
         self.json = json
         self.df = pd.DataFrame.from_dict(self.json["tasks"])
@@ -36,6 +36,4 @@ class PredictionModel:
         self.values.drop("theory", axis=1, inplace=True)
         self.result = self.values.to_dict('list')
 
-        return self.result #каждому заданию соответствует 3 наиболее вероятных тега
-#пока что предсказание основывается только на тексте задания, но с появлением бд можно будет использовать и другие параметры
-#предсказание не всегда точное, тк бд небольшая  
+        return self.result 
